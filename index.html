@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f4f5f2">
+<meta name="theme-color" content="#f1f4f6">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -12,12 +12,14 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-180.png">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@700;900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:"Sofia Sans Extra Condensed";src:url(fonts/sofia-cyr.woff2) format("woff2");font-weight:700 900;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Sofia Sans Extra Condensed";src:url(fonts/sofia-lat.woff2) format("woff2");font-weight:700 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Golos Text";src:url(fonts/golos-cyr.woff2) format("woff2");font-weight:400 600;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Golos Text";src:url(fonts/golos-lat.woff2) format("woff2");font-weight:400 600;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --track:#b8432b; --track-deep:#8f2f1c; --field:#1f6b4a; --field-deep:#14503a; --flag:#f2c230;
-  --paper:#f4f5f2; --card:#fff; --ink:#15181a; --ink2:#4d5357; --line:#d5d9d3; --cold:#c3c8c4;
+  --paper:#f1f4f6; --card:#fff; --ink:#15181a; --ink2:#4a5157; --line:#d2d8dd; --cold:#c1c8cd;
   --disp:"Sofia Sans Extra Condensed","Arial Narrow",sans-serif;
   --ui:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
@@ -53,6 +55,11 @@ h2{font:900 30px/1 var(--disp);text-transform:uppercase;margin:36px 0 12px;paddi
 .btn:active{transform:scale(.97)}
 .btn.pri{background:var(--track);border-color:var(--track);color:#fff;min-height:68px;font:900 30px/1 var(--disp);text-transform:uppercase;letter-spacing:.02em}
 .btn.ghost{border-color:var(--line);font-weight:500}
+.btn.on{background:var(--ink);color:#fff}
+.btns.stack>*{flex-basis:100%}
+.btns.stack .danger{margin-top:18px}
+.ed [data-a=rm]{margin-left:10px}
+summary .row .v{margin-left:auto}
 .btn.danger{border-color:var(--track);color:var(--track-deep)}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 .btns>*{flex:1 1 140px}
@@ -75,7 +82,7 @@ details>summary::-webkit-details-marker{display:none}
 details>summary .row::after{content:"";width:9px;height:9px;border-right:2.2px solid var(--ink);border-bottom:2.2px solid var(--ink);transform:rotate(45deg);flex:none;align-self:center;transition:transform .2s var(--ease)}
 details[open]>summary .row::after{transform:rotate(-135deg)}
 details .in{padding:0 0 14px}
-.sets{color:var(--ink2);font-size:15px}
+.sets{color:var(--ink2);font-size:15px;text-align:right}
 .chart{margin-top:12px}
 .chart svg{width:100%;height:auto;overflow:visible}
 .chart text{font:400 11px var(--ui);fill:var(--ink2)}
@@ -107,7 +114,7 @@ details .in{padding:0 0 14px}
 .legend .r::before{background:#49b384}.legend .o::before{background:var(--flag)}
 
 /* ---------- экран тренировки ---------- */
-body[data-phase=set]{--bg:var(--track);--fg:#fff;--fg2:#ffe3da;--btn:#fff;--btnfg:var(--track-deep);--rule:#ffffff73}
+body[data-phase=set]{--bg:var(--track);--fg:#fff;--fg2:#fff1ec;--btn:#fff;--btnfg:var(--track-deep);--rule:#ffffff73}
 body[data-phase=rest]{--bg:var(--field);--fg:#fff;--fg2:#d6f0e2;--btn:#fff;--btnfg:var(--field-deep);--rule:#ffffff73}
 body[data-phase=over]{--bg:var(--flag);--fg:var(--ink);--fg2:#3a3208;--btn:var(--ink);--btnfg:#fff;--rule:#15181a66}
 .wk{min-height:100dvh;display:flex;flex-direction:column;background:var(--bg);color:var(--fg);transition:background-color .4s,color .4s;
@@ -119,7 +126,9 @@ body[data-phase=over]{--bg:var(--flag);--fg:var(--ink);--fg2:#3a3208;--btn:var(-
 .wk .top button{width:44px;height:44px;display:grid;place-items:center;margin-right:-10px;color:var(--fg)}
 .wk .head{display:flex;gap:14px;align-items:flex-end;margin-top:20px}
 .wk .num{font:900 128px/.76 var(--disp);letter-spacing:-.02em}
-.wk .ex{font:900 44px/.92 var(--disp);text-transform:uppercase;text-wrap:balance}
+.wk .ex{font:900 44px/.92 var(--disp);text-transform:uppercase;text-wrap:balance;overflow-wrap:anywhere}
+.wk .ex.long{font-size:34px}
+.wk .head>div:last-child{min-width:0}
 .wk .meta{color:var(--fg2);margin-top:6px;font-size:15px}
 .wk .last{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding:10px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:15px}
 .wk .last span:last-child{text-align:right}
@@ -244,7 +253,7 @@ const I={
 function metric(id,s){const e=ex(id);if(e.run)return s.min>0?s.km/(s.min/60):0;return ((e.bw?bodyKg():0)+(s.kg||0))*(1+s.reps/30)}
 const best=(id,sets)=>Math.max(...sets.map(s=>metric(id,s)));
 function hist(id,list=S.workouts){const r=[];for(const w of list)for(const it of w.items)if(it.ex===id&&it.sets.length)r.push({t:w.start,sets:it.sets,hi:it.hi});return r}
-function fmtSet(id,s){const e=ex(id);if(e.run)return num(s.km)+' км за '+num(s.min)+' мин';if(e.bw)return (s.kg?'+'+num(s.kg)+' кг × ':'')+s.reps;return num(s.kg)+' × '+s.reps}
+function fmtSet(id,s){const e=ex(id);if(e.run)return num(s.km)+' км за '+num(s.min)+' мин';if(e.bw)return (s.kg?'+'+num(s.kg)+'\u00a0кг\u00a0×\u00a0':'')+s.reps;return num(s.kg)+'\u00a0×\u00a0'+s.reps}
 const fmtSets=(id,sets)=>sets.map(s=>fmtSet(id,s)).join(', ');
 // двойная прогрессия: добрал верх диапазона во всех подходах → вес выше, иначе +1 повтор
 function suggest(it,idx,today){
@@ -309,17 +318,18 @@ function insights(){
 }
 
 /* ================= графики ================= */
-function chart(pts,kind,unit){
+function chart(pts,kind,unit,span){
   if(!pts.length)return '';
   const W=340,H=150,pl=4,pr=46,pt=14,pb=22,vs=pts.map(p=>p.v);
   let lo=kind==='bar'?0:Math.min(...vs),hi=Math.max(...vs);if(hi-lo<1e-9){hi+=1;lo=Math.max(0,lo-1)}
+  if(span&&hi-lo<span){const m=(hi+lo)/2;lo=m-span/2;hi=m+span/2}
   const pad=(hi-lo)*.15;hi+=pad;if(kind!=='bar')lo-=pad;
   const n=pts.length,slot=(W-pl-pr)/n,x=i=>pl+slot*(i+.5),y=v=>pt+(H-pt-pb)*(1-(v-lo)/(hi-lo));
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="График: ${pts.map(p=>p.l+' '+num(p.v)).join(', ')} ${unit}">`;
-  for(const g of [Math.min(...vs),Math.max(...vs)].filter((v,i,a)=>a.indexOf(v)===i))s+=`<path d="M${pl} ${y(g)}H${W-pr}" stroke="#d5d9d3" stroke-width="1"/><text x="${W-pr+6}" y="${y(g)+4}">${num(g)}</text>`;
+  for(const g of [Math.max(...vs),Math.min(...vs)].filter((v,i,a)=>i===0||Math.abs(y(v)-y(a[0]))>=14))s+=`<path d="M${pl} ${y(g)}H${W-pr}" stroke="#d2d8dd" stroke-width="1"/><text x="${W-pr+6}" y="${y(g)+4}">${num(g)}</text>`;
   if(kind==='bar'){const bw=Math.min(28,slot-2);pts.forEach((p,i)=>{const t=y(p.v),h=Math.max(2,H-pb-t),r=Math.min(4,h);s+=`<path d="M${x(i)-bw/2} ${H-pb}v${-(h-r)}q0 ${-r} ${r} ${-r}h${bw-2*r}q${r} 0 ${r} ${r}v${h-r}z" fill="#b8432b"/>`})}
   else{s+=`<polyline points="${pts.map((p,i)=>x(i)+','+y(p.v)).join(' ')}" fill="none" stroke="#b8432b" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
-    pts.forEach((p,i)=>s+=`<circle cx="${x(i)}" cy="${y(p.v)}" r="${i===n-1?5:3.5}" fill="#b8432b" stroke="#f4f5f2" stroke-width="2"/>`)}
+    pts.forEach((p,i)=>s+=`<circle cx="${x(i)}" cy="${y(p.v)}" r="${i===n-1?5:3.5}" fill="#b8432b" stroke="#f1f4f6" stroke-width="2"/>`)}
   s+=`<path d="M${pl} ${H-pb}H${W-pr}" stroke="#15181a" stroke-width="1"/><text x="${pl}" y="${H-6}">${pts[0].l}</text>`;
   if(n>1)s+=`<text x="${W-pr}" y="${H-6}" text-anchor="end">${pts[n-1].l}</text>`;
   pts.forEach((p,i)=>s+=`<rect x="${pl+slot*i}" y="0" width="${slot}" height="${H}" fill="transparent" data-a="tip" data-t="${esc(p.l+': '+num(p.v)+' '+unit+(p.x?' · '+p.x:''))}"/>`);
@@ -329,16 +339,16 @@ function chart(pts,kind,unit){
 
 /* ================= фигура ================= */
 function figure(heat,back){
-  const c0=[195,200,196],c1=[184,67,43],col=m=>{const k=clamp(heat[m]||0);return 'rgb('+c0.map((a,i)=>Math.round(a+(c1[i]-a)*k)).join(',')+')'};
+  const c0=[193,200,205],c1=[184,67,43],col=m=>{const v=clamp(heat[m]||0),k=v>0?.22+.78*v:0;return 'rgb('+c0.map((a,i)=>Math.round(a+(c1[i]-a)*k)).join(',')+')'};
   const r=(m,x,y,w,h,rx)=>`<rect fill="${col(m)}" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}"/><rect fill="${col(m)}" x="${120-x-w}" y="${y}" width="${w}" height="${h}" rx="${rx}"/>`;
   const p=(m,d)=>`<path fill="${col(m)}" d="${d}"/><path fill="${col(m)}" d="${d}" transform="translate(120 0) scale(-1 1)"/>`;
-  const base='<g fill="#e4e7e3"><circle cx="60" cy="15" r="12"/><rect x="54" y="24" width="12" height="12"/><rect x="33" y="34" width="54" height="78" rx="17"/><rect x="38" y="98" width="44" height="30" rx="13"/>'+
+  const base='<g fill="#e2e7ea"><circle cx="60" cy="15" r="12"/><rect x="54" y="24" width="12" height="12"/><rect x="33" y="34" width="54" height="78" rx="17"/><rect x="38" y="98" width="44" height="30" rx="13"/>'+
     [[18,38,17,58,8.5],[14,90,15,44,7.5],[38,116,21,66,10.5],[41,176,16,56,8],[39,228,19,9,4.5]].map(([x,y,w,h,rx])=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}"/><rect x="${120-x-w}" y="${y}" width="${w}" height="${h}" rx="${rx}"/>`).join('')+'<circle cx="21" cy="139" r="6.5"/><circle cx="99" cy="139" r="6.5"/></g>';
   const common=r('forearms',15.5,93,12,36,6)+r('calves',42.5,180,13,44,6.5);
-  const front=p('traps','M52 33h8v6H42z')+`<ellipse fill="${col('delts')}" cx="27" cy="48" rx="8.5" ry="10"/><ellipse fill="${col('delts')}" cx="93" cy="48" rx="8.5" ry="10"/>`+
-    r('chest',37.5,42,21.5,21,7)+r('biceps',20,61,13,27,6.5)+`<rect fill="${col('abs')}" x="47" y="67" width="26" height="42" rx="8"/><path d="M60 69v38M49 80h22M49 93h22" stroke="#e4e7e3" stroke-width="1.6"/>`+r('quads',39.5,121,18,54,9);
-  const rear=`<path fill="${col('traps')}" d="M60 30l23 11-15 9-8 26-8-26-15-9z"/><ellipse fill="${col('rear')}" cx="27" cy="48" rx="8.5" ry="10"/><ellipse fill="${col('rear')}" cx="93" cy="48" rx="8.5" ry="10"/>`+
-    p('lats','M37 54l13 1 6 24-1 17-14-7z')+`<rect fill="${col('lower')}" x="51" y="98" width="18" height="12" rx="5"/>`+r('triceps',20,61,13,27,6.5)+r('glutes',39.5,113,19.5,21,9)+r('hams',39.5,137,18,39,9);
+  const front=r('traps',42,34,17,5,2.5)+`<ellipse fill="${col('delts')}" cx="27" cy="48" rx="8.5" ry="10"/><ellipse fill="${col('delts')}" cx="93" cy="48" rx="8.5" ry="10"/>`+
+    r('chest',37.5,42,21.5,21,7)+r('biceps',20,61,13,27,6.5)+`<rect fill="${col('abs')}" x="47" y="67" width="26" height="42" rx="8"/><path d="M60 69v38M49 80h22M49 93h22" stroke="#e2e7ea" stroke-width="1.6"/>`+r('quads',39.5,121,18,54,9);
+  const rear=`<rect fill="${col('traps')}" x="41" y="33" width="38" height="17" rx="8"/><rect fill="${col('traps')}" x="53" y="52" width="14" height="24" rx="6"/><ellipse fill="${col('rear')}" cx="27" cy="48" rx="8.5" ry="10"/><ellipse fill="${col('rear')}" cx="93" cy="48" rx="8.5" ry="10"/>`+
+    r('lats',37,54,14,40,7)+`<rect fill="${col('lower')}" x="51" y="98" width="18" height="12" rx="5"/>`+r('triceps',20,61,13,27,6.5)+r('glutes',39.5,113,19.5,21,9)+r('hams',39.5,137,18,39,9);
   return `<figure><svg viewBox="0 0 120 240" role="img" aria-label="${back?'Вид сзади':'Вид спереди'}">${base}${common}${back?rear:front}</svg><figcaption>${back?'Сзади':'Спереди'}</figcaption></figure>`;
 }
 
@@ -364,7 +374,7 @@ const listOf=ctx=>ctx==='draft'?draft().items:S.program[+ctx].items;
 function planRows(items,ctx,edit){
   return '<ul class="rows">'+items.map((it,i)=>{
     const e=ex(it.ex),sg=suggest(it,0);
-    const v=e.run?(hist(it.ex).length?num(sg.km)+' км':'10–15 мин'):`${it.sets} × ${it.lo}–${it.hi}`+(ctx==='draft'&&(sg.kg||!e.bw)?` · <span class="${sg.up?'up':''}">${e.bw?'+':''}${num(sg.kg)} кг${sg.up?' ↑':''}</span>`:'');
+    const v=e.run?(hist(it.ex).length?num(sg.km)+' км':'10–15 мин'):`${it.sets} × ${it.lo}–${it.hi}`+(ctx==='draft'&&(sg.kg||!e.bw)?` · <span class="${sg.up?'up':''}">${e.bw?'+':''}${num(sg.kg)} кг${sg.up?' '+I.up.replace('class="ic"','class="ic" style="display:inline;width:16px;height:16px;vertical-align:-2px"'):''}</span>`:'');
     let h=`<li><div class="row"><b>${exn(it.ex)}</b><span class="v">${v}</span></div>`;
     if(edit){const alts=Object.keys(EX).filter(k=>k!==it.ex&&!EX[k].run&&Object.keys(e.m).some(m=>e.m[m]===1&&EX[k].m[m]===1));
       h+=`<div class="ed"><button class="sq" data-a="mv" data-ctx="${ctx}" data-i="${i}" data-d="-1" aria-label="Выше">${I.up}</button><button class="sq" data-a="mv" data-ctx="${ctx}" data-i="${i}" data-d="1" aria-label="Ниже">${I.down}</button>`+
@@ -379,10 +389,10 @@ function vToday(){
   return `<h1>${esc(S.program[d.day].name)}</h1>
   <p class="sub">День ${d.day+1} из ${n} · около ${estMin(d.items)} минут${last?' · прошлая тренировка '+ago(last.start):''}</p>
   <div class="btns" style="margin-top:20px"><button class="btn pri" data-a="start">Начать тренировку</button></div>
-  ${ins.length?'<h2>Что поменять</h2>'+ins.slice(0,3).map(t=>`<p class="note">${t}</p>`).join(''):''}
   <h2>План на сегодня</h2>
   ${planRows(d.items,'draft',S.ui.edit)}
-  <div class="btns"><button class="btn ghost" data-a="edit">${S.ui.edit?'Готово':'Изменить план'}</button><button class="btn ghost" data-a="weight">Вес тела: ${num(bodyKg())} кг</button></div>
+  <div class="btns"><button class="btn${S.ui.edit?' on':''}" data-a="edit">${S.ui.edit?'Готово':'Изменить план'}</button><button class="btn ghost" data-a="weight">Вес тела: ${num(bodyKg())} кг</button></div>
+  ${ins.length?'<h2>Что поменять</h2>'+ins.slice(0,3).map(t=>`<p class="note">${t}</p>`).join(''):''}
   <h2>Другой день</h2>
   <div class="seg">${S.program.map((p,i)=>`<button data-a="day" data-i="${i}" aria-pressed="${i===d.day}">${i+1}</button>`).join('')}</div>
   <p class="sub small">Дни идут по кругу. Следующий по очереди: ${S.next%n+1}, «${esc(S.program[S.next%n].name)}».</p>
@@ -392,7 +402,7 @@ function vProgress(){
   const W=S.workouts;
   let h='<h1>Прогресс</h1>';
   h+=`<h2>Вес тела</h2><div class="row"><b>${num(bodyKg())} кг</b><span class="v">цель ${BODY_GOAL}–80 кг</span></div>`+
-    (S.body.length>1?chart(S.body.slice(-16).map(b=>({l:day(b.t),v:b.kg})),'line','кг'):'<p class="sub small">График появится после второго взвешивания.</p>')+
+    (S.body.length>1?chart(S.body.slice(-16).map(b=>({l:day(b.t),v:b.kg})),'line','кг',3):'<p class="sub small">График появится после второго взвешивания.</p>')+
     '<div class="btns"><button class="btn ghost" data-a="weight">Записать вес</button></div>';
   if(!W.length)return h+'<h2>Тренировки</h2><p class="muted">Здесь появятся графики и история после первой тренировки.</p>';
   const mt=S.ui.mt||'score',MT={score:['Оценка','баллов',w=>w.score?w.score.total:0],min:['Минуты','мин',w=>(w.end-w.start)/6e4],sets:['Подходы','подх.',setsOf],ton:['Тоннаж','кг',tonnage]};
@@ -430,9 +440,10 @@ function vPlan(){
   <h2>Программа</h2>${S.program.map((d,i)=>`<details${S.ui.pd===i?' open':''} data-pd="${i}"><summary><div class="row"><span><b>День ${i+1}</b> · ${esc(d.name)}</span><span class="v">${d.items.length} упр.</span></div></summary><div class="in">${planRows(d.items,String(i),true)}</div></details>`).join('')}
   <div class="btns"><button class="btn ghost" data-a="resetprog">Вернуть исходную программу</button></div>
   <h2>Данные</h2><p class="sub" style="margin:0 0 4px">Всё хранится только на этом телефоне. Выгрузи файл, чтобы сохранить копию или отдать её на разбор.</p>
-  <div class="btns"><button class="btn" data-a="export">Выгрузить файл</button><button class="btn" data-a="copy">Скопировать</button><button class="btn ghost" data-a="import">Загрузить из файла</button><button class="btn danger" data-a="wipe">Стереть всё</button></div>
+  <div class="btns stack"><button class="btn" data-a="export">Выгрузить файл</button><button class="btn" data-a="copy">Скопировать</button><button class="btn ghost" data-a="import">Загрузить из файла</button><button class="btn danger" data-a="wipe">Стереть всё</button></div>
   <input type="file" id="file" accept="application/json,.json" hidden>`;
 }
+function prDelta(w,id){const h=hist(id,S.workouts.filter(x=>x.start<w.start));if(!h.length)return '';const d=best(id,w.items.find(i=>i.ex===id).sets)-Math.max(...h.map(x=>best(id,x.sets)));return '+'+num(d)+(ex(id).run?' км/ч':' кг')+' к лучшему результату'}
 function vSummary(w){
   const sc=w.score,prs=w.prs||[];
   const part=(name,v,max,txt)=>`<li><div class="row"><b>${name}</b><span class="v">${Math.round(v*max)} из ${max} · ${txt}</span></div><div class="bar"><i style="width:${v*100}%"></i></div></li>`;
@@ -443,8 +454,8 @@ function vSummary(w){
   ${part('Результат',sc.res,35,prs.length?prs.length+' '+plural(prs.length,'рекорд','рекорда','рекордов'):sc.first?'первая запись':'к прошлому разу')}
   ${part('Отдых',sc.pace,15,sc.ratio>1.02?'на '+Math.round((sc.ratio-1)*100)+'% дольше плана':'по плану')}
   ${part('Длительность',sc.dur,15,Math.round(sc.min)+' мин')}</ul>
-  <div class="stats"><div><b>${Math.round(sc.min)}</b><span>минут</span></div><div><b>${setsOf(w)}</b><span>${plural(setsOf(w),'подход','подхода','подходов')}</span></div><div><b>${num(tonnage(w)/1000)}</b><span>тонн поднято</span></div><div><b>${prs.length}</b><span>${plural(prs.length,'рекорд','рекорда','рекордов')}</span></div></div>
-  ${prs.length?'<h2>Рекорды</h2><ul class="rows">'+prs.map(id=>`<li class="row"><b>${exn(id)}</b><span class="sets">${fmtSets(id,w.items.find(i=>i.ex===id).sets)}</span></li>`).join('')+'</ul>':''}
+  <p class="sub">Поднято ${num(tonnage(w)/1000)} т вместе с весом тела.</p>
+  ${prs.length?'<h2>Рекорды</h2><ul class="rows">'+prs.map(id=>`<li class="row"><b>${exn(id)}</b><span class="sets">${fmtSets(id,w.items.find(i=>i.ex===id).sets)}<br>${prDelta(w,id)}</span></li>`).join('')+'</ul>':''}
   <h2>Как прошла</h2>${strip(w.items.flatMap(i=>i.sets))}${LEGEND}
   <div class="btns" style="margin-top:28px"><button class="btn pri" data-a="closesum">Готово</button></div></div>`;
 }
@@ -458,7 +469,7 @@ function vWorkout(){
     const h=hist(it.ex).pop(),sg=suggest(it,a.s),c=a.cur;
     const st=(k,label,step)=>`<div class="stp"><button data-a="step" data-k="${k}" data-d="${-step}" aria-label="Меньше: ${label}">${I.minus}</button><label><input id="in-${k}" inputmode="decimal" value="${String(c[k]).replace('.',',')}" data-c="cur" data-k="${k}" aria-label="${label}">${label}</label><button data-a="step" data-k="${k}" data-d="${step}" aria-label="Больше: ${label}">${I.plus}</button></div>`;
     return `<main class="wk">${top}
-    <div class="head">${e.run?'':`<div class="num">${a.s+1}</div>`}<div><div class="ex">${exn(it.ex)}</div><div class="meta">${e.run?'в спокойном темпе, 10–15 минут':`подход ${a.s+1} из ${it.sets} · цель ${it.lo}–${it.hi} повторов`}</div></div></div>
+    <div class="head">${e.run?'':`<div class="num">${a.s+1}</div>`}<div><div class="ex${exn(it.ex).split(/[\s-]/).some(w=>w.length>10)?' long':''}">${exn(it.ex)}</div><div class="meta">${e.run?'в спокойном темпе, 10–15 минут':`подход ${a.s+1} из ${it.sets} · цель ${it.lo}–${it.hi} повторов`}</div></div></div>
     <div class="last"><span>${h?'Прошлый раз':'Первый раз'}</span><span>${h?fmtSets(it.ex,h.sets):e.run?'запиши дистанцию и время':'подбери вес с запасом в 2 повтора'}${sg.up&&!a.s?' · сегодня вес выше':''}</span></div>
     ${e.run?st('km','километров',.1)+st('min','минут',.5):st('reps','повторов',1)+st('kg',e.bw?'доп. вес, кг':'кг',e.st)}
     <button class="go" data-a="doneset">${a.i===a.plan.length-1&&a.s===it.sets-1?'Готово, закончить':'Готово, отдыхать'}</button>${foot({c:'',v:el})}</main>`;
@@ -473,7 +484,7 @@ function vWorkout(){
   <button class="go" data-a="rested">Отдохнул</button>${foot({c:'r',v:el})}</main>`;
 }
 const TABS={today:['Сегодня',I.today,vToday],progress:['Прогресс',I.chart,vProgress],muscles:['Мышцы',I.body,vMuscles],plan:['План',I.plan,vPlan]};
-const BG={set:'#b8432b',rest:'#1f6b4a',over:'#f2c230','':'#f4f5f2'};
+const BG={set:'#b8432b',rest:'#1f6b4a',over:'#f2c230','':'#f1f4f6'};
 let lastPhase='';
 function render(keepScroll){
   const y=scrollY,a=S.active,ph=a?phase():'';
@@ -524,7 +535,7 @@ const A={
   edit:()=>{S.ui.edit=!S.ui.edit;render(true)},
   mv:d=>{const l=listOf(d.ctx),i=+d.i,j=i+ +d.d;if(j<0||j>=l.length)return;[l[i],l[j]]=[l[j],l[i]];save();render(true)},
   nsets:d=>{const it=listOf(d.ctx)[+d.i];it.sets=clamp(it.sets+ +d.d,1,8);save();render(true)},
-  rm:d=>{listOf(d.ctx).splice(+d.i,1);save();render(true)},
+  rm:d=>{const l=listOf(d.ctx);if(!confirm('Убрать из плана: '+ex(l[+d.i].ex).n+'?'))return;l.splice(+d.i,1);save();render(true)},
   start:()=>{const d=draft();if(!d.items.length)return toast('В плане нет упражнений');
     try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume()}catch{}
     S.active={day:d.day,name:S.program[d.day].name,start:Date.now(),plan:d.items.map(i=>({...i})),i:0,s:0,phase:'set',t0:Date.now(),done:d.items.map(()=>[]),extra:0,restPlan:0};
@@ -547,8 +558,8 @@ const A={
     <button class="btn" data-a="fin">Закончить тренировку</button><button class="btn danger" data-a="cancel">Отменить без записи</button><button class="btn ghost" data-a="close">Закрыть</button></div>`)},
   close:()=>dlg.close(),
   addset:()=>{const a=S.active;a.plan[a.i].sets++;save();dlg.close();render()},
-  skip:()=>{const a=S.active;dlg.close();a.i++;a.s=0;if(a.i>=a.plan.length)return finish();a.t0=Date.now();enterSet();save();render()},
-  fin:()=>{dlg.close();const a=S.active;if(a.phase==='rest'){const [i]=a.ref,set=a.done[i][a.done[i].length-1];if(set&&set.rest==null){set.rest=Math.round((Date.now()-a.t0)/1000);set.plan=a.restPlan+a.extra}}finish()},
+  skip:()=>{const a=S.active;if(!confirm('Пропустить это упражнение?'))return;dlg.close();a.i++;a.s=0;if(a.i>=a.plan.length)return finish();a.t0=Date.now();enterSet();save();render()},
+  fin:()=>{if(!confirm('Закончить тренировку сейчас?'))return;dlg.close();const a=S.active;if(a.phase==='rest'){const [i]=a.ref,set=a.done[i][a.done[i].length-1];if(set&&set.rest==null){set.rest=Math.round((Date.now()-a.t0)/1000);set.plan=a.restPlan+a.extra}}finish()},
   cancel:()=>{if(confirm('Отменить тренировку? Записанные подходы пропадут.')){dlg.close();S.active=null;save();render()}},
   closesum:()=>{S.ui.sum=null;S.ui.tab='today';save();render()},
   weight:()=>sheet(`<h3>Вес тела</h3><form method="dialog" class="col" id="wf"><input id="wkg" inputmode="decimal" aria-label="Вес в килограммах" value="${String(bodyKg()).replace('.',',')}"><button class="btn pri" value="ok">Записать</button><button class="btn ghost" value="">Отмена</button></form>`),
